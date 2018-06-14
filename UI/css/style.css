@@ -8,6 +8,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
 }
+#request-body, #offers-body {
+    background: rgb(250, 245, 245);
+}
 
 /****MY CSS GRID****/
 * {
@@ -141,6 +144,12 @@ body {
     color: black;
 }
 
+.square {
+    background: white;
+    border: 1px solid rgb(231, 226, 226);
+    padding: 20px 10px;
+}
+
 .tile {
     padding: 0;
     border: 1px solid rgb(231, 226, 226);
@@ -193,7 +202,7 @@ body {
     border-right: 1px solid rgb(231, 226, 226);
 }
 /****MODAL STYLINGS***/
-.modal#detail-modal {
+.modal{
     display: none; 
     position: fixed;
     z-index: 1; 
@@ -205,9 +214,10 @@ body {
     background-color: rgba(0,0,0,0.6);
     padding-top: 60px;
 }
-.modal#detail-modal .modal-content {
+.modal .modal-content {
     width: 45%;
     margin: 5% auto 10% auto;
+
 }
 .modal#detail-modal .tile{
     border: 0 !important;
@@ -220,6 +230,18 @@ body {
 .modal#detail-modal .tile .tile-heading h4 {
     margin: 0;
 }
+.modal#reject-ride-request-modal .tile {
+    border-radius: 3px;
+    border: 0;
+}
+.modal#reject-ride-request-modal .tile .tile-body{
+    padding: 45px 10px 40px;
+}
+
+
+
+
+
 
 /*****NAVIGATION******/
 nav {
@@ -363,6 +385,7 @@ p.error-message {
     border-radius: 3px;
     width: 100%;
     margin: 15px auto;
+    background: white;
 }
 
 @media only screen and (min-width: 992px) {

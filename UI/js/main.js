@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
-    $('main.content .content-inner form button#login-btn').on('click', function(event) {
+    $('main.content .wrapper form button#login-btn').on('click', function(event) {
         event.preventDefault();
         var err = '';
-        var errorOutput = $('.content .content-inner form p.error-message');
-        var username = $('.content .content-inner form input[name=username]').val();
-        var password = $('.content .content-inner form input[name=password]').val();
+        var errorOutput = $('.content .wrapper form p.error-message');
+        var username = $('.content .wrapper form input[name=username]').val();
+        var password = $('.content .wrapper form input[name=password]').val();
 
         if (!username && !password){
             err = 'Username and Password are both required!';
@@ -35,17 +35,17 @@ $(document).ready(function () {
     });
 
 
-    $('main.content .content-inner form button#register-btn').on('click', function(event) {
+    $('main.content .wrapper form button#register-btn').on('click', function(event) {
         event.preventDefault();
 
-        var errorOutput = $('.content .content-inner form p.error-message');
+        var errorOutput = $('.content .wrapper form p.error-message');
         errorOutput.text = '';
 
-        var firstname = $('.content .content-inner form input[name=firstname]');
-        var lastname = $('.content .content-inner form input[name=lastname]');
-        var email = $('.content .content-inner form input[name=email]');
-        var username = $('.content .content-inner form input[name=username]');
-        var password = $('.content .content-inner form input[name=password]');
+        var firstname = $('.content .wrapper form input[name=firstname]');
+        var lastname = $('.content .wrapper form input[name=lastname]');
+        var email = $('.content .wrapper form input[name=email]');
+        var username = $('.content .wrapper form input[name=username]');
+        var password = $('.content .wrapper form input[name=password]');
 
         var fields = [firstname, lastname, email, username, password];
         var allProvided = true;
@@ -104,7 +104,54 @@ $(document).ready(function () {
 
     $('.modal#detail-modal .modal-content .tile .tile-footer button.join').on('click', function() {
         $('.modal#detail-modal .modal-content .tile .tile-heading span.message').text('REQUEST SENT')
+    });
+
+    $('.inner-container div button.accept-btn').on('click', function() {
+        $(this).text('ACCEPTED').css('background-color', 'green');
     })
+
+
+    
+    $('.inner-container div button.reject-btn').on('click', function(event) {
+        var requestId = $(this).parent().parent().attr('id');
+        var passenger = $(this).parent().prev().children().children().html();
+
+        var status = $(this).prev().text();
+
+        if(status == "ACCEPTED") {
+            var responseHtml = '<p class="error-message">Sorry, You have already accepted this ride';
+            $('#reject-ride-request-modal .modal-content .tile .tile-body').html(responseHtml);
+            $('#reject-ride-request-modal .modal-content .tile .tile-footer button.reject-btn').hide();
+            $('#reject-ride-request-modal').css('display','block');            
+        }else{
+            var responseHtml = '<p class="confirm-msg small">Are you sure you want to REJECT a ride request from <span>John</span> </p> <p class="error-message smaller"></p>'
+            $('#reject-ride-request-modal .modal-content .tile .tile-body').html(responseHtml);
+            $('#reject-ride-request-modal .modal-content .tile .tile-footer button.reject-btn').show().attr('data-request_id', requestId);
+            $('#reject-ride-request-modal .modal-content .tile .tile-body p span').text(passenger);
+            $('#reject-ride-request-modal').css('display','block');
+        }
+        
+    });
+
+    $(window).click(function(event) {
+        var target = $(event.target);
+
+        if(target.is('#reject-ride-request-modal')) {
+            $('#reject-ride-request-modal').css('display','none');
+        }
+    });
+
+    //close button for #reject-ride-request-modal
+    $('.modal#reject-ride-request-modal .modal-content .tile .tile-footer button.close').on('click', function(event) {
+        $('.modal#reject-ride-request-modal').css('display', 'none');
+    })
+
+    $('.modal#reject-ride-request-modal .modal-content .tile .tile-footer button.reject-btn').on('click', function() {
+        var requestId = $(this).data('request_id');
+        console.log(requestId)
+        $('.inner-container#'+requestId).css('display', 'none');
+        $('.modal#reject-ride-request-modal .modal-content .tile .tile-body p.error-message').text('RIDE REJECTED')
+    });
 
 
 })
