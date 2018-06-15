@@ -8,6 +8,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
 }
+.toggle {
+    display: block;
+}
 #request-body, #offers-body {
     background: rgb(250, 245, 245);
 }
@@ -24,8 +27,13 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    position: relative;
 }
-
+@media only screen and (max-width: 350px) {
+    .wrapper {
+        width: 90%;
+    }
+}
 /*FOR ALL COLUMNS***/
 
 [class*="co-"] {
@@ -205,7 +213,7 @@ body {
 .modal{
     display: none; 
     position: fixed;
-    z-index: 1; 
+    z-index: 3; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -215,8 +223,19 @@ body {
     padding-top: 60px;
 }
 .modal .modal-content {
-    width: 45%;
+    width: 50%;
     margin: 5% auto 10% auto;
+}
+@media only screen and (max-width: 700px) {
+    .modal .modal-content {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .modal .modal-content {
+        width: 95%;
+    }
 }
 .modal#detail-modal .tile{
     border: 0 !important;
@@ -274,7 +293,7 @@ nav {
     right: 0;
     left: 0;
     height: 54px;
-    z-index: 1;
+    z-index: 2;
 }
 .submenu {
     background: white;
@@ -283,6 +302,7 @@ nav {
     top: 53px;
     left: 0;
     right: 0;
+    z-index: 1;
 }
 
 .submenu a {
@@ -294,6 +314,19 @@ nav {
 }
 .submenu a:hover {
     background: rgb(250, 245, 245);
+}
+
+/*****/
+nav .navbar > p.navbar-toggle {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 14px;
+    font-size: 60%;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 nav ul {
     margin: 0;
@@ -312,9 +345,7 @@ nav ul > li > a {
     display: inline-block;
     padding: 13px 8px;
 }
-nav .navbar {
-    overflow: auto;
-}
+
 .nav-left {
     float: left;
     font-size: 100%;
@@ -326,6 +357,39 @@ nav .navbar {
     margin-top: 3px;
 }
 
+
+@media only screen and (max-width: 700px) {
+    nav .navbar .nav-right {
+        display: none;
+        width: 230px;
+        position: absolute;
+        top: 52px;
+        right: 0;
+        z-index: 2;
+        background: white;
+        border: 1px solid rgb(231, 226, 226);
+        box-shadow: 0px 2px 3px 4px rgba(0, 0, 0, 0.04);
+    }
+    nav .navbar .nav-right li {
+        display: block;
+        width: 100%;
+    }
+    nav .navbar .nav-right li:not(:last-child) {
+        border-bottom: 1px solid rgb(231, 226, 226);
+    }
+    nav .navbar .nav-right li a {
+        color: black;
+        font-size: 80%;
+        padding: 9px 8px;
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 701px) {
+    nav .navbar > p.navbar-toggle {
+        display: none;
+    }
+
+}
 
 /***PAGE CONTENT***/
 .content {
