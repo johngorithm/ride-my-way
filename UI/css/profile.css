@@ -23,8 +23,6 @@ section#ride-details {
 }
 
 section#ride-details .square {
-    box-shadow: 0 2px 5px 2px rgb(0,0,0,0.06);
-    border: 0;
     border-radius: 3px;
 }
 

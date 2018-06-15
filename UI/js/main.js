@@ -1,5 +1,59 @@
 $(document).ready(function () {
 
+    //ADD OFFER FORM MODAL JS
+    $('nav.navigation .navbar ul li.nav-item a[href="#"]').on('click', function(event) {
+        event.preventDefault();
+        $('.modal#add-offer-modal').css('display', 'block');
+    });
+
+    //ADD OFFER MODAL .close button 
+    $('.modal#add-offer-modal button.close').on('click', function (event) {
+        event.preventDefault();
+        $('.modal#add-offer-modal').css('display', 'none');
+    });
+
+    //ADD OFFER MODAL .create button
+    $('.modal#add-offer-modal button.create').on('click', function (event) {
+        event.preventDefault();
+        //form validate
+        var inputError = '';
+        var destination = $('#add-offer-modal .modal-content form input[name=destination]');
+        var time = $('#add-offer-modal .modal-content form input[name=time]');
+        var date = $('#add-offer-modal .modal-content form input[name=date]');
+        var takeOffVenue = $('#add-offer-modal .modal-content form input[name=takeoff_venue]');
+
+        var formFields = [destination, time, date, takeOffVenue];
+        var isAllProvided = true;
+        formFields.forEach(function (field) { 
+            if(!field.val()) {
+            
+                if(field.attr('name') == 'destination') {
+                    inputError = 'destination is required!';
+                    field.prev().find('span').text(inputError);
+                }else if(field.attr('name') == 'time') {
+                    inputError = 'time is required!';
+                    field.prev().find('span').text(inputError);
+                }else if(field.attr('name') == 'date') {
+                    inputError = 'date is required!';
+                    field.prev().find('span').text(inputError);
+                }else if(field.attr('name') == 'takeoff_venue') {
+                    inputError = 'takeoff venue is required!';
+                    field.prev().find('span').text(inputError);
+                }
+                isAllProvided = false;
+                
+            }else{
+                field.prev().find('span').text('');
+            }
+         });
+
+         if(isAllProvided) {
+             $('#add-offer-modal .modal-content form p.success-message').text('YOUR RIDE OFFER IS SUCCESSFULLY CREATED!');
+             return false;
+         }
+    });
+
+
     $('main.content .wrapper form button#login-btn').on('click', function(event) {
         event.preventDefault();
         var err = '';
@@ -41,13 +95,13 @@ $(document).ready(function () {
         var errorOutput = $('.content .wrapper form p.error-message');
         errorOutput.text = '';
 
-        var firstname = $('.content .wrapper form input[name=firstname]');
-        var lastname = $('.content .wrapper form input[name=lastname]');
+        var fullname = $('.content .wrapper form input[name=fullname]');
+        var phone = $('.content .wrapper form input[name=phone]');
         var email = $('.content .wrapper form input[name=email]');
         var username = $('.content .wrapper form input[name=username]');
         var password = $('.content .wrapper form input[name=password]');
 
-        var fields = [firstname, lastname, email, username, password];
+        var fields = [fullname, phone, email, username, password];
         var allProvided = true;
         fields.forEach(function(field) {
             if(!field.val()) {
@@ -111,9 +165,8 @@ $(document).ready(function () {
     })
 
 
-    
+    //USING THE REJECT BUTTON FOR REQUESTS
     $('.inner-container div button.reject-btn').on('click', function(event) {
-        var requestId = $(this).parent().parent().attr('id');
         var passenger = $(this).parent().prev().children().children().html();
 
         var status = $(this).prev().text();
@@ -124,15 +177,17 @@ $(document).ready(function () {
             $('#reject-ride-request-modal .modal-content .tile .tile-footer button.reject-btn').hide();
             $('#reject-ride-request-modal').css('display','block');            
         }else{
+            var requestId = $(this).parent().parent().attr('id');
             var responseHtml = '<p class="confirm-msg small">Are you sure you want to REJECT a ride request from <span>John</span> </p> <p class="error-message smaller"></p>'
             $('#reject-ride-request-modal .modal-content .tile .tile-body').html(responseHtml);
-            $('#reject-ride-request-modal .modal-content .tile .tile-footer button.reject-btn').show().attr('data-request_id', requestId);
+            $('#reject-ride-request-modal .modal-content .tile .tile-footer button.reject-btn').show().data('request_id', requestId);
             $('#reject-ride-request-modal .modal-content .tile .tile-body p span').text(passenger);
             $('#reject-ride-request-modal').css('display','block');
         }
         
     });
 
+    //REMOVING THE REJECT MODAL POP ON WINDOW CLICK
     $(window).click(function(event) {
         var target = $(event.target);
 
@@ -146,11 +201,14 @@ $(document).ready(function () {
         $('.modal#reject-ride-request-modal').css('display', 'none');
     })
 
+    //CONFIRMED REJECTION ACTION
     $('.modal#reject-ride-request-modal .modal-content .tile .tile-footer button.reject-btn').on('click', function() {
         var requestId = $(this).data('request_id');
-        console.log(requestId)
         $('.inner-container#'+requestId).css('display', 'none');
-        $('.modal#reject-ride-request-modal .modal-content .tile .tile-body p.error-message').text('RIDE REJECTED')
+        $('.modal#reject-ride-request-modal .modal-content .tile .tile-body p.error-message').text('RIDE REJECTED');
+        setTimeout(function() {
+            $('.modal#reject-ride-request-modal').css('display', 'none');
+        }, 2000)
     });
 
 

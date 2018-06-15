@@ -217,7 +217,6 @@ body {
 .modal .modal-content {
     width: 45%;
     margin: 5% auto 10% auto;
-
 }
 .modal#detail-modal .tile{
     border: 0 !important;
@@ -236,9 +235,30 @@ body {
 }
 .modal#reject-ride-request-modal .tile .tile-body{
     padding: 45px 10px 40px;
-    
 }
-
+.modal#add-offer-modal .modal-content form {
+    border-radius: 3px;
+    background: white; 
+}
+.modal#add-offer-modal .modal-content form .row {
+    padding: 13px 13px;
+}
+.modal#add-offer-modal .modal-content form .row [class*="co-"] {
+    padding: 6px 5px;
+    position: relative;
+}
+.modal#add-offer-modal .modal-content form .row [class*="co-"] input{
+    width: 100%;
+    background: rgb(250, 245, 245);
+    border-radius: 3px;
+}
+.success-message {
+    color: rgb(116, 163, 22);
+    font-size: 14px;
+}
+.error-message {
+    color: rgb(255, 35, 6);
+}
 
 
 
@@ -294,7 +314,6 @@ nav ul > li > a {
 }
 nav .navbar {
     overflow: auto;
-
 }
 .nav-left {
     float: left;
@@ -303,6 +322,7 @@ nav .navbar {
 .nav-right {
     float: right;
     font-size: 80%;
+    text-transform: uppercase;
     margin-top: 3px;
 }
 

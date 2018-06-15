@@ -10,8 +10,46 @@
     <link rel="stylesheet" type="text/css" media="screen" href="./css/profile.css" />
 </head>
 <body>
+    
+    <div class="modal" id="add-offer-modal"><!--ADD OFFER MODAL STARTS-->
+        <div class="modal-content animate">
+            <form action="#" method="POST">
+                <div class="row">
+                    <p class="success-message small center-text"></p>
+                    <div class="co-xl-12 co-lg-12 co-md-12 co-sm-12">
+                        <p class="smaller">Destination <span class="error-message">  </span> </p>
+                        <input type="text" name="destination">
+                    </div>
 
-    <div class="modal" id="detail-modal">
+                    <div class="co-xl-6 co-lg-6 co-md-6 co-sm-6">
+                        <p class="smaller">Date <span class="error-message">  </span> </p>
+                        <input type="date" name="date">
+                    </div>
+
+                    <div class="co-xl-6 co-lg-6 co-md-6 co-sm-6">
+                        <p class="smaller">Time <span class="error-message">  </span> </p>
+                        <input type="time" name="time">
+                    </div>
+
+                    <div class="co-xl-12 co-lg-12 co-md-12 co-sm-12">
+                        <p class="smaller">Takeoff Venue <span class="error-message">  </span> </p>
+                        <input type="text" name="takeoff_venue">
+                    </div>
+
+                    <div class="co-xl-12 co-lg-12 co-md-12 co-sm-12 right-text">
+                        <button type="button" class="button button-white close">CLOSE</button>                        
+                        <button type="submit" class="button button-blue create">CREATE OFFER</button>                      
+                    </div>
+                    
+                    
+                </div>
+            </form>
+        </div>
+    </div><!--OFFER A RIDE MODAL END-->
+
+
+
+    <div class="modal" id="detail-modal"><!--RIDE DETAIL MODAL STARTS-->
         <div class="modal-content animate">
             <div class="tile">
                 <div class="tile-heading center-text">
@@ -44,7 +82,7 @@
                 </div>
             </div>
         </div>
-    </div><!---RIDE VIEW MODAL END-->
+    </div><!---RIDE DETAIL VIEW MODAL END-->
     
     <nav class="navigation">
         <div class="navbar wrapper">
